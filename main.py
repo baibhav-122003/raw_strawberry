@@ -458,39 +458,38 @@ elif st.session_state["page"] == "Load Data":
                 ]
             }
         }
-        response = requests.post(FINAL_API_URL, json=payload, headers=headers)
-        print(response)
+        
 
-        # with st.spinner("Creating Data Pipeline..."):
-        #     try:
-        #         response = requests.post(FINAL_API_URL, json=payload, headers=headers)
-        #         for chunk in response.iter_content(chunk_size=1024):
-        #             if chunk:
-        #                 pass  # Keep waiting until the response is fully received
-        #         if response.status_code == 201:
-        #             st.session_state["page"] = "Pipeline Success"
-        #         else:
-        #             st.error(f"Failed to create pipeline: {response.text}")
-        #     except Exception as e:
-        #         st.error(f"An error occurred: {e}")
-        # st.rerun()
+        with st.spinner("Creating Data Pipeline..."):
+            try:
+                response = requests.post(FINAL_API_URL, json=payload, headers=headers)
+                for chunk in response.iter_content(chunk_size=1024):
+                    if chunk:
+                        pass  # Keep waiting until the response is fully received
+                if response.status_code == 201:
+                    st.session_state["page"] = "Pipeline Success"
+                else:
+                    st.error(f"Failed to create pipeline: {response.text}")
+            except Exception as e:
+                st.error(f"An error occurred: {e}")
+        st.rerun()
 
-# ######################
-# # Page 5: Pipeline Success
-# ######################
-# elif st.session_state["page"] == "Pipeline Success":
-#     st.balloons()
-#     st.success("🎉 Data Pipeline Created Successfully! 🎉")
-#     if st.button("Okay"):
-#         st.session_state["page"] = "Pipeline Final"
-#         st.rerun()
+######################
+# Page 5: Pipeline Success
+######################
+elif st.session_state["page"] == "Pipeline Success":
+    st.balloons()
+    st.success("🎉 Data Pipeline Created Successfully! 🎉")
+    if st.button("Okay"):
+        st.session_state["page"] = "Pipeline Final"
+        st.rerun()
 
-# ######################
-# # Page 6: Pipeline Final (New Pipeline Option)
-# ######################
-# elif st.session_state["page"] == "Pipeline Final":
-#     st.title("Data Pipeline Completed")
-#     if st.button("Create New Pipeline"):
-#         st.session_state.clear()
-#         st.session_state["page"] = "Select Data Source"
-#         st.rerun()
+######################
+# Page 6: Pipeline Final (New Pipeline Option)
+######################
+elif st.session_state["page"] == "Pipeline Final":
+    st.title("Data Pipeline Completed")
+    if st.button("Create New Pipeline"):
+        st.session_state.clear()
+        st.session_state["page"] = "Select Data Source"
+        st.rerun()
