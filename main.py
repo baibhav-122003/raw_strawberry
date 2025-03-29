@@ -11,6 +11,12 @@ FINAL_API_URL = "https://api.fabric.microsoft.com/v1/workspaces/28b51e78-d498-45
 
 AUTH_TOKEN = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkNOdjBPSTNSd3FsSEZFVm5hb01Bc2hDSDJYRSIsImtpZCI6IkNOdjBPSTNSd3FsSEZFVm5hb01Bc2hDSDJYRSJ9.eyJhdWQiOiJodHRwczovL2FwaS5mYWJyaWMubWljcm9zb2Z0LmNvbSIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzRhYzUwMTA1LTBjNjYtNDA0ZS1hMTA3LTdjYmQ4YTlhNjQ0Mi8iLCJpYXQiOjE3NDMyODc1MzAsIm5iZiI6MTc0MzI4NzUzMCwiZXhwIjoxNzQzMjkyNzI2LCJhY2N0IjowLCJhY3IiOiIxIiwiYWlvIjoiQVhRQWkvOFpBQUFBcjFmN2UrcmQ4RzU5N3dNdDlZQUc2UXB5ZW9lYmZUZzRPNUNvN2Z2UnVPTnFjSE8vT1RCQXYrb3NMd1BTUEZsRFJnblhDQ00wd1hIbWgwS0E5MExGT2tJV3BqN2R2Sk1laDNxVXgwYTg0WlZZckxLR0VodkZsRzhPdDVTVXI1WEUxdEhhSmZYTlp5T0ZmVzhWOXdBTmpBPT0iLCJhbXIiOlsicHdkIiwibWZhIl0sImFwcGlkIjoiMThmYmNhMTYtMjIyNC00NWY2LTg1YjAtZjdiZjJiMzliM2YzIiwiYXBwaWRhY3IiOiIwIiwiZmFtaWx5X25hbWUiOiJEZWJyb3kiLCJnaXZlbl9uYW1lIjoiQW5raXQiLCJpZHR5cCI6InVzZXIiLCJpcGFkZHIiOiIxNC45Ny4xNjQuNDYiLCJuYW1lIjoiQW5raXQgRGVicm95Iiwib2lkIjoiNGI4ZWJmYjYtODUxNC00YjBlLWEwODMtMDY4MjIzZGQwZWU0IiwicHVpZCI6IjEwMDMyMDA0MzhDODg1NDIiLCJyaCI6IjEuQVZZQUJRSEZTbVlNVGtDaEIzeTlpcHBrUWdrQUFBQUFBQUFBd0FBQUFBQUFBQUNmQUN0V0FBLiIsInNjcCI6IkFwcC5SZWFkLkFsbCBDYXBhY2l0eS5SZWFkLkFsbCBDYXBhY2l0eS5SZWFkV3JpdGUuQWxsIENvbm5lY3Rpb24uUmVhZC5BbGwgQ29ubmVjdGlvbi5SZWFkV3JpdGUuQWxsIENvbnRlbnQuQ3JlYXRlIERhc2hib2FyZC5SZWFkLkFsbCBEYXNoYm9hcmQuUmVhZFdyaXRlLkFsbCBEYXRhZmxvdy5SZWFkLkFsbCBEYXRhZmxvdy5SZWFkV3JpdGUuQWxsIERhdGFzZXQuUmVhZC5BbGwgRGF0YXNldC5SZWFkV3JpdGUuQWxsIEdhdGV3YXkuUmVhZC5BbGwgR2F0ZXdheS5SZWFkV3JpdGUuQWxsIEl0ZW0uRXhlY3V0ZS5BbGwgSXRlbS5FeHRlcm5hbERhdGFTaGFyZS5BbGwgSXRlbS5SZWFkV3JpdGUuQWxsIEl0ZW0uUmVzaGFyZS5BbGwgT25lTGFrZS5SZWFkLkFsbCBPbmVMYWtlLlJlYWRXcml0ZS5BbGwgUGlwZWxpbmUuRGVwbG95IFBpcGVsaW5lLlJlYWQuQWxsIFBpcGVsaW5lLlJlYWRXcml0ZS5BbGwgUmVwb3J0LlJlYWRXcml0ZS5BbGwgUmVwcnQuUmVhZC5BbGwgU3RvcmFnZUFjY291bnQuUmVhZC5BbGwgU3RvcmFnZUFjY291bnQuUmVhZFdyaXRlLkFsbCBUZW5hbnQuUmVhZC5BbGwgVGVuYW50LlJlYWRXcml0ZS5BbGwgVXNlclN0YXRlLlJlYWRXcml0ZS5BbGwgV29ya3NwYWNlLkdpdENvbW1pdC5BbGwgV29ya3NwYWNlLkdpdFVwZGF0ZS5BbGwgV29ya3NwYWNlLlJlYWQuQWxsIFdvcmtzcGFjZS5SZWFkV3JpdGUuQWxsIiwic2lkIjoiMDAzMjNiNzktNWQ0Yi01ZGUzLTI4MDMtNjUzZTE0MmQ5ZDk4Iiwic2lnbmluX3N0YXRlIjpbImttc2kiXSwic3ViIjoidDBQNlRYSHJfNWp4RV8zTGpQN3kyRVhhRlkyNy1ocjJ6TUU5Q3lIb0Y0ayIsInRpZCI6IjRhYzUwMTA1LTBjNjYtNDA0ZS1hMTA3LTdjYmQ4YTlhNjQ0MiIsInVuaXF1ZV9uYW1lIjoiYW5raXQuZEBTaWdtb2lkYW5hbHl0aWNzLmNvbSIsInVwbiI6ImFua2l0LmRAU2lnbW9pZGFuYWx5dGljcy5jb20iLCJ1dGkiOiI0eGs3TDk4YkowU1JvVUNqbzF3ekFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX2lkcmVsIjoiMSAyMCJ9.XD-t1QaO0t9fwjPiRgVjvALPDxV_Hv-dXaEoUPic4wEV_YxCwPYGMsPYYjJqKhGoJx1u0ozvJHFxlMyGq9qNVpyT50UwrV6lVNJzO1Sn--iq4IuXLQt0L13BUc9zSRRtbrPcM6GeExlCBuKpvZxKZE5kgExrcphiZPA1dj8gBdsKsC-SAS6QWasPXBNFrLhsXu4Ppiqa8DeVJH8KZh6jozBQHOC7RQtQHLlLxvUnMplZK8WjiZePihkZ_k0nfep_T5IRzcFKWbKXrHEEs9EPD5Gu9MoImuM8oLKgyUL5PwazUdtcY2eE4v28XOGnDS_1maB4aKhSSh7JADfmjL1ptQ"
 
+
+
+if "pipeline_name" not in st.session_state:
+    st.session_state["pipeline_name"] = ""
+
+
 remove_nulls = False
 remove_duplicates = False
 selected_table = None
@@ -39,13 +45,14 @@ if "page" not in st.session_state:
 # UI Title with Strawberry Icon
 st.markdown("<h1 style='text-align: center; font-size: 50px;'>_project🍓</h1>", unsafe_allow_html=True)
 
+
+
 ######################
 # Page 1: Data Source Selection
 ######################
 if st.session_state["page"] == "Select Data Source":
     
     # Ask for Pipeline Name first (value is automatically stored in st.session_state with key "pipeline_name")
-    pipeline_name = st.text_input("Enter Pipeline Name", key="pipeline_name")
 
     st.title("Select Data Source")
     data_source = st.selectbox("Choose a Data Source", ["Onelake"])
@@ -190,6 +197,7 @@ elif st.session_state["page"] == "Load Data":
     st.title("Load Data")
     data_destination = st.selectbox("Choose Data Destination", ["Onelake"], key="destination")
     output_table = st.text_input("Output Table Name", key="output_table")
+    pipeline_name = st.text_input("Enter Pipeline Name", key="pipeline_name")
 
     if st.button("Confirm"):
         st.session_state["data_destination"] = data_destination
@@ -436,8 +444,9 @@ elif st.session_state["page"] == "Load Data":
             "Authorization": AUTH_TOKEN,
             "Content-Type": "application/json"
         }
+        print(st.session_state["pipeline_name"])
         payload = {
-            "displayName": "_projectStrawberry",
+            "displayName": st.session_state["pipeline_name"],
             "description": "A data pipeline description",
             "definition": {
                 "parts": [
