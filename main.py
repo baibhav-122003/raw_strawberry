@@ -6,10 +6,10 @@ import time
 import json
 import base64
 
+FINAL_API_URL = "https://api.fabric.microsoft.com/v1/workspaces/28b51e78-d498-45f6-b9e8-6e22cc442754/dataPipelines?workspaceId=28b51e78-d498-45f6-b9e8-6e22cc442754"
 
 
-
-AUTH_TOKEN = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkNOdjBPSTNSd3FsSEZFVm5hb01Bc2hDSDJYRSIsImtpZCI6IkNOdjBPSTNSd3FsSEZFVm5hb01Bc2hDSDJYRSJ9.eyJhdWQiOiJodHRwczovL2FwaS5mYWJyaWMubWljcm9zb2Z0LmNvbSIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzRhYzUwMTA1LTBjNjYtNDA0ZS1hMTA3LTdjYmQ4YTlhNjQ0Mi8iLCJpYXQiOjE3NDMyNzk0MDAsIm5iZiI6MTc0MzI3OTQwMCwiZXhwIjoxNzQzMjg1MDg2LCJhY2N0IjowLCJhY3IiOiIxIiwiYWlvIjoiQVhRQWkvOFpBQUFBRFJDTFdWbFYydExnV3lncUJzd0JkbXRMQWNkUnpoMFlQODBVcVFnNjJwMy9PYk5VTUU3TXNHNG02OUVnVm41U3FYNjZlL0lnbXp5eWZlRnRkZVhkaytDNGtzbkhIdFduNDRDcnp1ZGVvWUl2djVVY2tqdERJS0JBcytiZjhVOW1HYndFNWkwbjVlN2hpWFVNazZDTG9nPT0iLCJhbXIiOlsicHdkIiwibWZhIl0sImFwcGlkIjoiMThmYmNhMTYtMjIyNC00NWY2LTg1YjAtZjdiZjJiMzliM2YzIiwiYXBwaWRhY3IiOiIwIiwiZmFtaWx5X25hbWUiOiJEZWJyb3kiLCJnaXZlbl9uYW1lIjoiQW5raXQiLCJpZHR5cCI6InVzZXIiLCJpcGFkZHIiOiIxNC45Ny4xNjQuNDYiLCJuYW1lIjoiQW5raXQgRGVicm95Iiwib2lkIjoiNGI4ZWJmYjYtODUxNC00YjBlLWEwODMtMDY4MjIzZGQwZWU0IiwicHVpZCI6IjEwMDMyMDA0MzhDODg1NDIiLCJyaCI6IjEuQVZZQUJRSEZTbVlNVGtDaEIzeTlpcHBrUWdrQUFBQUFBQUFBd0FBQUFBQUFBQUNmQUN0V0FBLiIsInNjcCI6IkFwcC5SZWFkLkFsbCBDYXBhY2l0eS5SZWFkLkFsbCBDYXBhY2l0eS5SZWFkV3JpdGUuQWxsIENvbm5lY3Rpb24uUmVhZC5BbGwgQ29ubmVjdGlvbi5SZWFkV3JpdGUuQWxsIENvbnRlbnQuQ3JlYXRlIERhc2hib2FyZC5SZWFkLkFsbCBEYXNoYm9hcmQuUmVhZFdyaXRlLkFsbCBEYXRhZmxvdy5SZWFkLkFsbCBEYXRhZmxvdy5SZWFkV3JpdGUuQWxsIERhdGFzZXQuUmVhZC5BbGwgRGF0YXNldC5SZWFkV3JpdGUuQWxsIEdhdGV3YXkuUmVhZC5BbGwgR2F0ZXdheS5SZWFkV3JpdGUuQWxsIEl0ZW0uRXhlY3V0ZS5BbGwgSXRlbS5FeHRlcm5hbERhdGFTaGFyZS5BbGwgSXRlbS5SZWFkV3JpdGUuQWxsIEl0ZW0uUmVzaGFyZS5BbGwgT25lTGFrZS5SZWFkLkFsbCBPbmVMYWtlLlJlYWRXcml0ZS5BbGwgUGlwZWxpbmUuRGVwbG95IFBpcGVsaW5lLlJlYWQuQWxsIFBpcGVsaW5lLlJlYWRXcml0ZS5BbGwgUmVwb3J0LlJlYWRXcml0ZS5BbGwgUmVwcnQuUmVhZC5BbGwgU3RvcmFnZUFjY291bnQuUmVhZC5BbGwgU3RvcmFnZUFjY291bnQuUmVhZFdyaXRlLkFsbCBUZW5hbnQuUmVhZC5BbGwgVGVuYW50LlJlYWRXcml0ZS5BbGwgVXNlclN0YXRlLlJlYWRXcml0ZS5BbGwgV29ya3NwYWNlLkdpdENvbW1pdC5BbGwgV29ya3NwYWNlLkdpdFVwZGF0ZS5BbGwgV29ya3NwYWNlLlJlYWQuQWxsIFdvcmtzcGFjZS5SZWFkV3JpdGUuQWxsIiwic2lkIjoiMDAzMjNiNzktNWQ0Yi01ZGUzLTI4MDMtNjUzZTE0MmQ5ZDk4Iiwic2lnbmluX3N0YXRlIjpbImttc2kiXSwic3ViIjoidDBQNlRYSHJfNWp4RV8zTGpQN3kyRVhhRlkyNy1ocjJ6TUU5Q3lIb0Y0ayIsInRpZCI6IjRhYzUwMTA1LTBjNjYtNDA0ZS1hMTA3LTdjYmQ4YTlhNjQ0MiIsInVuaXF1ZV9uYW1lIjoiYW5raXQuZEBTaWdtb2lkYW5hbHl0aWNzLmNvbSIsInVwbiI6ImFua2l0LmRAU2lnbW9pZGFuYWx5dGljcy5jb20iLCJ1dGkiOiJBNjNqbTlqanowR3JXN0RDYk53a0FBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX2lkcmVsIjoiMSAzMCJ9.fFdYK-QceHaks2Cob-G0hTaFMnxnfKIl-WZub16fQ64h4ehX3hpJFyNk--ti583k42iVza-HyXgdzjoQAfIadOtZ7Fo7TeMcgK07ZcTXs83fD1sek-KGljpOl-Zn1B_sBW0pEYF3sVwidWTGtkbDgrNyB6c4F1nSQloP-IYdD4sLm3hE8j_GaXFQQrJxcA-AMANOae7IP_WnUxq_rWoLubzNSRs7UTyakXiTJozmzNbwxtLnKNEBS2eakd4KG4fbkeDxccxPl77E5z7R05c6aDw2hrD0RSJR_iwr7hp3aJ70GHkQtWOreBPXZ4UzV6v67T5EAtoXg8CCf1UEYdDQwA"
+AUTH_TOKEN = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IkNOdjBPSTNSd3FsSEZFVm5hb01Bc2hDSDJYRSIsImtpZCI6IkNOdjBPSTNSd3FsSEZFVm5hb01Bc2hDSDJYRSJ9.eyJhdWQiOiJodHRwczovL2FwaS5mYWJyaWMubWljcm9zb2Z0LmNvbSIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzRhYzUwMTA1LTBjNjYtNDA0ZS1hMTA3LTdjYmQ4YTlhNjQ0Mi8iLCJpYXQiOjE3NDMyODc1MzAsIm5iZiI6MTc0MzI4NzUzMCwiZXhwIjoxNzQzMjkyNzI2LCJhY2N0IjowLCJhY3IiOiIxIiwiYWlvIjoiQVhRQWkvOFpBQUFBcjFmN2UrcmQ4RzU5N3dNdDlZQUc2UXB5ZW9lYmZUZzRPNUNvN2Z2UnVPTnFjSE8vT1RCQXYrb3NMd1BTUEZsRFJnblhDQ00wd1hIbWgwS0E5MExGT2tJV3BqN2R2Sk1laDNxVXgwYTg0WlZZckxLR0VodkZsRzhPdDVTVXI1WEUxdEhhSmZYTlp5T0ZmVzhWOXdBTmpBPT0iLCJhbXIiOlsicHdkIiwibWZhIl0sImFwcGlkIjoiMThmYmNhMTYtMjIyNC00NWY2LTg1YjAtZjdiZjJiMzliM2YzIiwiYXBwaWRhY3IiOiIwIiwiZmFtaWx5X25hbWUiOiJEZWJyb3kiLCJnaXZlbl9uYW1lIjoiQW5raXQiLCJpZHR5cCI6InVzZXIiLCJpcGFkZHIiOiIxNC45Ny4xNjQuNDYiLCJuYW1lIjoiQW5raXQgRGVicm95Iiwib2lkIjoiNGI4ZWJmYjYtODUxNC00YjBlLWEwODMtMDY4MjIzZGQwZWU0IiwicHVpZCI6IjEwMDMyMDA0MzhDODg1NDIiLCJyaCI6IjEuQVZZQUJRSEZTbVlNVGtDaEIzeTlpcHBrUWdrQUFBQUFBQUFBd0FBQUFBQUFBQUNmQUN0V0FBLiIsInNjcCI6IkFwcC5SZWFkLkFsbCBDYXBhY2l0eS5SZWFkLkFsbCBDYXBhY2l0eS5SZWFkV3JpdGUuQWxsIENvbm5lY3Rpb24uUmVhZC5BbGwgQ29ubmVjdGlvbi5SZWFkV3JpdGUuQWxsIENvbnRlbnQuQ3JlYXRlIERhc2hib2FyZC5SZWFkLkFsbCBEYXNoYm9hcmQuUmVhZFdyaXRlLkFsbCBEYXRhZmxvdy5SZWFkLkFsbCBEYXRhZmxvdy5SZWFkV3JpdGUuQWxsIERhdGFzZXQuUmVhZC5BbGwgRGF0YXNldC5SZWFkV3JpdGUuQWxsIEdhdGV3YXkuUmVhZC5BbGwgR2F0ZXdheS5SZWFkV3JpdGUuQWxsIEl0ZW0uRXhlY3V0ZS5BbGwgSXRlbS5FeHRlcm5hbERhdGFTaGFyZS5BbGwgSXRlbS5SZWFkV3JpdGUuQWxsIEl0ZW0uUmVzaGFyZS5BbGwgT25lTGFrZS5SZWFkLkFsbCBPbmVMYWtlLlJlYWRXcml0ZS5BbGwgUGlwZWxpbmUuRGVwbG95IFBpcGVsaW5lLlJlYWQuQWxsIFBpcGVsaW5lLlJlYWRXcml0ZS5BbGwgUmVwb3J0LlJlYWRXcml0ZS5BbGwgUmVwcnQuUmVhZC5BbGwgU3RvcmFnZUFjY291bnQuUmVhZC5BbGwgU3RvcmFnZUFjY291bnQuUmVhZFdyaXRlLkFsbCBUZW5hbnQuUmVhZC5BbGwgVGVuYW50LlJlYWRXcml0ZS5BbGwgVXNlclN0YXRlLlJlYWRXcml0ZS5BbGwgV29ya3NwYWNlLkdpdENvbW1pdC5BbGwgV29ya3NwYWNlLkdpdFVwZGF0ZS5BbGwgV29ya3NwYWNlLlJlYWQuQWxsIFdvcmtzcGFjZS5SZWFkV3JpdGUuQWxsIiwic2lkIjoiMDAzMjNiNzktNWQ0Yi01ZGUzLTI4MDMtNjUzZTE0MmQ5ZDk4Iiwic2lnbmluX3N0YXRlIjpbImttc2kiXSwic3ViIjoidDBQNlRYSHJfNWp4RV8zTGpQN3kyRVhhRlkyNy1ocjJ6TUU5Q3lIb0Y0ayIsInRpZCI6IjRhYzUwMTA1LTBjNjYtNDA0ZS1hMTA3LTdjYmQ4YTlhNjQ0MiIsInVuaXF1ZV9uYW1lIjoiYW5raXQuZEBTaWdtb2lkYW5hbHl0aWNzLmNvbSIsInVwbiI6ImFua2l0LmRAU2lnbW9pZGFuYWx5dGljcy5jb20iLCJ1dGkiOiI0eGs3TDk4YkowU1JvVUNqbzF3ekFBIiwidmVyIjoiMS4wIiwid2lkcyI6WyJiNzlmYmY0ZC0zZWY5LTQ2ODktODE0My03NmIxOTRlODU1MDkiXSwieG1zX2lkcmVsIjoiMSAyMCJ9.XD-t1QaO0t9fwjPiRgVjvALPDxV_Hv-dXaEoUPic4wEV_YxCwPYGMsPYYjJqKhGoJx1u0ozvJHFxlMyGq9qNVpyT50UwrV6lVNJzO1Sn--iq4IuXLQt0L13BUc9zSRRtbrPcM6GeExlCBuKpvZxKZE5kgExrcphiZPA1dj8gBdsKsC-SAS6QWasPXBNFrLhsXu4Ppiqa8DeVJH8KZh6jozBQHOC7RQtQHLlLxvUnMplZK8WjiZePihkZ_k0nfep_T5IRzcFKWbKXrHEEs9EPD5Gu9MoImuM8oLKgyUL5PwazUdtcY2eE4v28XOGnDS_1maB4aKhSSh7JADfmjL1ptQ"
 
 remove_nulls = False
 remove_duplicates = False
@@ -43,6 +43,10 @@ st.markdown("<h1 style='text-align: center; font-size: 50px;'>_project🍓</h1>"
 # Page 1: Data Source Selection
 ######################
 if st.session_state["page"] == "Select Data Source":
+    
+    # Ask for Pipeline Name first (value is automatically stored in st.session_state with key "pipeline_name")
+    pipeline_name = st.text_input("Enter Pipeline Name", key="pipeline_name")
+
     st.title("Select Data Source")
     data_source = st.selectbox("Choose a Data Source", ["Onelake"])
     
@@ -59,7 +63,7 @@ if st.session_state["page"] == "Select Data Source":
             st.session_state["selected_table"] = selected_table
             st.session_state["page"] = "Data Cleaning"
             st.rerun()
-
+    
 ######################
 # Page 2: Data Cleaning
 ######################
@@ -427,28 +431,57 @@ elif st.session_state["page"] == "Load Data":
             }
         }
 
-        
-        with st.spinner("Creating Data Pipeline..."):
-            time.sleep(2)
-            st.session_state["page"] = "Pipeline Success"
-            st.rerun()
+        pipeline_definition_base64 = json_to_base64(pipeline_definition)
+        headers = {
+            "Authorization": AUTH_TOKEN,
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "displayName": "_projectStrawberry",
+            "description": "A data pipeline description",
+            "definition": {
+                "parts": [
+                    {
+                        "path": "pipeline-content.json",
+                        "payload": pipeline_definition_base64,
+                        "payloadType": "InlineBase64"
+                    }
+                ]
+            }
+        }
+        response = requests.post(FINAL_API_URL, json=payload, headers=headers)
+        print(response)
 
-######################
-# Page 5: Pipeline Success
-######################
-elif st.session_state["page"] == "Pipeline Success":
-    st.balloons()
-    st.success("🎉 Data Pipeline Created Successfully! 🎉")
-    if st.button("Okay"):
-        st.session_state["page"] = "Pipeline Final"
-        st.rerun()
+        # with st.spinner("Creating Data Pipeline..."):
+        #     try:
+        #         response = requests.post(FINAL_API_URL, json=payload, headers=headers)
+        #         for chunk in response.iter_content(chunk_size=1024):
+        #             if chunk:
+        #                 pass  # Keep waiting until the response is fully received
+        #         if response.status_code == 201:
+        #             st.session_state["page"] = "Pipeline Success"
+        #         else:
+        #             st.error(f"Failed to create pipeline: {response.text}")
+        #     except Exception as e:
+        #         st.error(f"An error occurred: {e}")
+        # st.rerun()
 
-######################
-# Page 6: Pipeline Final (New Pipeline Option)
-######################
-elif st.session_state["page"] == "Pipeline Final":
-    st.title("Data Pipeline Completed")
-    if st.button("Create New Pipeline"):
-        st.session_state.clear()
-        st.session_state["page"] = "Select Data Source"
-        st.rerun()
+# ######################
+# # Page 5: Pipeline Success
+# ######################
+# elif st.session_state["page"] == "Pipeline Success":
+#     st.balloons()
+#     st.success("🎉 Data Pipeline Created Successfully! 🎉")
+#     if st.button("Okay"):
+#         st.session_state["page"] = "Pipeline Final"
+#         st.rerun()
+
+# ######################
+# # Page 6: Pipeline Final (New Pipeline Option)
+# ######################
+# elif st.session_state["page"] == "Pipeline Final":
+#     st.title("Data Pipeline Completed")
+#     if st.button("Create New Pipeline"):
+#         st.session_state.clear()
+#         st.session_state["page"] = "Select Data Source"
+#         st.rerun()
